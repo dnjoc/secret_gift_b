@@ -78,48 +78,46 @@ app.get('/api/persons/:id', (request, response, next) => {
 })
 
 //convierte la primera letra de cada palabra en Mayuscula
-const capitalizeName = (name) => {
-  return name.split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(' ')
-}
-app.post('/api/persons', (request, response, next) => {
-  //app.post('/api/persons', (request, response) => {
-  const body = request.body
-  if (!body.name || !body.password) {
-    let msg
-    //mensaje especifico al dato faltante
-    if (!body.name) {
-      msg = 'name missing'
-    } else {
-      msg = 'password missing'
-    }
-    return response.status(400).json({
-      error: msg
-    })
-  }
-  //Se busca si existe el nombre para indicar que no puede ser agregado
-  const person = new Gift({
-    name: capitalizeName(body.name),
-  })
-  // persons = persons.concat(person)
-  person.save().then(savePerson => {
-    response.json(savePerson)
-  })
-    .catch(error => next(error))
-  //response.json(person)
-})
+// const capitalizeName = (name) => {
+//   return name.split(' ')
+//     .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+//     .join(' ')
+// }
+// app.post('/api/persons', (request, response, next) => {
+//   //app.post('/api/persons', (request, response) => {
+//   const body = request.body
+//   if (!body.name || !body.password) {
+//     let msg
+//     //mensaje especifico al dato faltante
+//     if (!body.name) {
+//       msg = 'name missing'
+//     } else {
+//       msg = 'password missing'
+//     }
+//     return response.status(400).json({
+//       error: msg
+//     })
+//   }
+//   //Se busca si existe el nombre para indicar que no puede ser agregado
+//   const person = new Gift({
+//     name: capitalizeName(body.name),
+//   })
+//   // persons = persons.concat(person)
+//   person.save().then(savePerson => {
+//     response.json(savePerson)
+//   })
+//     .catch(error => next(error))
+//   //response.json(person)
+// })
 
 app.put('/api/persons/:id', (request, response, next) => {
   const body = request.body
 
-  if (!body.name || !body.password) {
+  if (!body.name) {
     let msg
     //mensaje especifico al dato faltante
     if (!body.name) {
       msg = 'name missing'
-    } else {
-      msg = 'number missing'
     }
     return response.status(400).json({
       error: msg
