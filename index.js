@@ -8,8 +8,8 @@ require('dotenv').config()
 const Gift = require('./models/person')
 
 const errorHandler = (error, request, response, next) => {
-  console.error('mensaje error', error.message)
-  console.log('error. errors', error.errors)
+  //console.error('mensaje error', error.message)
+  // console.log('error. errors', error.errors)
 
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
@@ -161,5 +161,5 @@ app.use(errorHandler)
 //const PORT = process.env.PORT || 3001
 const PORT = process.env.PORT
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+  //console.log(`Server running on port ${PORT}`)
 })
